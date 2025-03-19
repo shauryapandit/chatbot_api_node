@@ -1,80 +1,76 @@
-# Gemini Chatbot API
+# Hono Chatbot API
 
-This is a simple chatbot API built using **Express.js** and **Google Gemini API**. The API allows users to send messages and receive AI-generated responses, while also maintaining a chat history.
+This is a chatbot API built using **Hono** and **Google Gemini AI**, with chat history stored in **Firebase Firestore**. The API allows users to send messages and receive responses from Gemini AI, while maintaining a chat history.
 
 ## Features
-- Supports real-time chat with the **Gemini AI model**.
-- Stores chat history in a JSON file.
-- Provides an endpoint to fetch previous conversations.
-- Built with **Node.js**, **Express.js**, and **Axios**.
+- 🌐 **REST API** with Hono framework
+- 🤖 **AI-powered chatbot** using Google Gemini AI
+- 🔥 **Firestore integration** for storing chat history
+- 🚀 **Lightweight & fast** due to Hono’s performance optimizations
+- 🔄 **JSON-based interaction** for easy integration with web or mobile apps
 
 ## Prerequisites
-- **Node.js** (v14+ recommended)
-- **npm** (or **yarn**)
-- **Google Gemini API Key**
-- **Postman** (Optional, for API testing)
+- Node.js (v18+ recommended)
+- Firebase Firestore credentials
+- A Google Gemini API key
 
 ## Installation
 
 1. **Clone the repository**
+   ```sh
+   git clone https://github.com/yourusername/hono-chatbot-api.git
+   cd hono-chatbot-api
+   ```
 
-
-2. **Install dependencies:**
+2. **Install dependencies**
    ```sh
    npm install
    ```
 
-3. **Set up environment variables:**
-   - Create a `.env` file in the project root.
-   - Add your **Google Gemini API Key**:
-     ```env
-     GEMINI_API_KEY=your_api_key_here
-     PORT=5000
-     ```
-
-4. **Run the server:**
-   ```sh
-   node server.js
+3. **Set up environment variables**
+   Create a `.env` file and add the following:
+   ```env
+   FIREBASE_CREDENTIALS='{"type": "service_account", "project_id": "your-project-id", ... }'
+   GEMINI_API_KEY='your-google-gemini-api-key'
    ```
 
-## API Endpoints
+## Usage
 
-### 1️⃣ Send a Chat Message
+### Start the server
+```sh
+npm start
+```
+The server will start at `http://localhost:3000`
+
+### API Endpoints
+
+#### 1️⃣ **Send a Message**
 - **Endpoint:** `POST /chat`
-- **Request Body:**
-  ```json
-  {
-    "message": "What is the capital of India?"
-  }
-  ```
-- **Response:**
-  ```json
-  {
-    "question": "What is the capital of India?",
-    "reply": "The capital of India is New Delhi."
-  }
+- **cURL Example:**
+  ```sh
+  curl -X POST "http://localhost:3000/chat" -H "Content-Type: application/json" -d "{\"message\": \"Who am i?\"}"
   ```
 
-### 2️⃣ Get Chat History
+#### 2️⃣ **Get Chat History**
 - **Endpoint:** `GET /history`
 - **Response:**
   ```json
   {
     "history": [
       { "role": "user", "parts": [{ "text": "Hello!" }] },
-      { "role": "model", "parts": [{ "text": "Hi! How can I assist you?" }] }
+      { "role": "model", "parts": [{ "text": "Hi there! How can I help?" }] }
     ]
   }
   ```
+- **cURL Example:**
+  ```sh
+  curl -X GET http://localhost:3000/history
+  ```
 
-## Testing with Postman
-1. Open **Postman**.
-2. Set method to **POST**, and enter `http://localhost:5000/chat`.
-3. Go to **Body → raw → JSON** and enter:
-   ```json
-   { "message": "Tell me a joke." }
-   ```
-4. Click **Send** to get a response.
+## Deployment
 
-
+To deploy the API, you can use platforms like:
+- **Vercel**: `vercel deploy`
+- **Railway**: `railway up`
+- **Render**: Deploy as a Node.js service
 
